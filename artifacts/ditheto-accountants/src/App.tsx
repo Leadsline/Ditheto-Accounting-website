@@ -32,7 +32,14 @@ const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
 );
-const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+const configuredClerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+// A Vercel deployment can be configured with the development Clerk key while
+// it is being prepared. Clerk rejects that key through the production proxy
+// with `host_invalid`; let the development instance use its direct FAPI until
+// a live key is supplied. Replit production keys remain proxied.
+const clerkProxyUrl = clerkPubKey.startsWith("pk_test_")
+  ? ""
+  : configuredClerkProxyUrl;
 
 function stripBase(path: string): string {
   return basePath && path.startsWith(basePath)
@@ -42,10 +49,26 @@ function stripBase(path: string): string {
 
 function AdminGuard({ children, fullAccess = false }: { children: ReactNode; fullAccess?: boolean }) {
   const { isLoaded, isSignedIn } = useAuth();
-  const { isLoaded: roleLoaded, isFullAccess, isMarketingOnly } = useRole();
+  const { isLoaded: roleLoaded, isFullAccess, isMarketingOnly, isUnauthorized } = useRole();
   if (!isLoaded) return <div className="min-h-screen bg-gray-50" />;
   if (!isSignedIn) return <Redirect to="/sign-in" />;
   if (!roleLoaded) return <div className="min-h-screen bg-gray-50" />;
+  if (isUnauthorized) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-6">
+        <div className="max-w-md rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Ditheto Admin Portal</p>
+          <h1 className="mt-3 text-2xl font-bold text-secondary">Access is being set up</h1>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Your sign-in is working, but this account has not been assigned a staff portal role yet.
+          </p>
+          <a href="/" className="mt-6 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-secondary">
+            Return to website
+          </a>
+        </div>
+      </div>
+    );
+  }
   if (fullAccess && !isFullAccess) return <Redirect to="/admin/campaigns" />;
   if (!fullAccess && isMarketingOnly) return <>{children}</>;
   return <>{children}</>;
