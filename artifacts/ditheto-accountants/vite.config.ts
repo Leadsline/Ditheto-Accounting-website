@@ -13,6 +13,11 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 const basePath = process.env.BASE_PATH ?? '/';
+const configuredClerkKey = process.env.CLERK_PUBLISHABLE_KEY;
+const clerkKeyForFrontend =
+  configuredClerkKey && /^pk_(live|test)_/.test(configuredClerkKey)
+    ? configuredClerkKey
+    : undefined;
 
 export default defineConfig({
   base: basePath,
@@ -51,6 +56,14 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, 'dist/public'),
     emptyOutDir: true,
   },
+  // Vercel stores the production Clerk publishable key as CLERK_PUBLISHABLE_KEY
+  // so the API and frontend cannot silently use different Clerk environments.
+  // Keep the VITE variable as the development fallback for local builds.
+  define: clerkKeyForFrontend
+    ? {
+        'import.meta.env.VITE_CLERK_PUBLISHABLE_KEY': JSON.stringify(clerkKeyForFrontend),
+      }
+    : undefined,
   server: {
     port,
     strictPort: true,
