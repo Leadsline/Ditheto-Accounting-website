@@ -1,0 +1,1 @@
+- [Vercel monorepo deployment](vercel-monorepo-deployment.md) — bundle the Express TypeScript API before Vercel packages a JavaScript adapter, and explicitly route `/api/*` to the catch-all function.

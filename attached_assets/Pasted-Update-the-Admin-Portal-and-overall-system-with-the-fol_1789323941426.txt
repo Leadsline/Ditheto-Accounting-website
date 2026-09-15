@@ -1,0 +1,42 @@
+Update the Admin Portal and overall system with the following new capabilities:
+
+1. Document Management per Client Profile (Super Admin only)
+   - On each client profile in the Admin Portal, add a full Document Management section.
+   - Super Admin must be able to:
+     • Upload documents (PDF, images, Word, Excel, etc.)
+     • Categorise documents (e.g. ID, Tax Clearance, IRP5, Bank Statements, Contracts, SARS Correspondence, etc.)
+     • Mark documents as “Received”, “Outstanding”, “Expired”, or “Under Review”
+     • View, download, replace, and delete documents
+     • See a clear list of outstanding documents for that client
+   - Only users with Super Admin role can manage documents. Regular staff can view but not edit.
+
+2. Request Outstanding Documents via Email & WhatsApp
+   - From the client profile, Super Admin must be able to:
+     • Select one or more outstanding documents
+     • Send a professional request to the client via Email
+     • Send the same request via WhatsApp Business
+   - The message should list the missing documents clearly and include a polite call-to-action.
+   - Log every request that was sent (date, channel, documents requested).
+   - Pre-fill WhatsApp and Email templates that the admin can edit before sending.
+
+3. Odoo Integration
+   - Integrate the website and Admin Portal with Odoo.
+   - Requirements:
+     • Sync client/customer data between the website database and Odoo Contacts/Customers
+     • Sync invoices, payments, and accounting documents where relevant
+     • Allow Super Admin to push new clients created on the website into Odoo
+     • Pull key client information and document status from Odoo when available
+     • Use Odoo’s API (XML-RPC or JSON-RPC / REST) with proper authentication
+     • Store Odoo credentials securely (environment variables)
+     • Show connection status in the Admin Portal (Connected / Disconnected)
+   - Make the integration modular so it can be enabled/disabled.
+
+Technical notes:
+- Use role-based access control (at minimum: Super Admin vs Staff).
+- Document storage should use secure file storage (local or cloud).
+- Email: use existing email service (Resend or similar).
+- WhatsApp: use WhatsApp Business API or deep-link + logging for now, with clear path to full API.
+- Keep the UI clean and consistent with the rest of the Admin Portal.
+- Update the project documentation to reflect these new features.
+
+Implement these features thoroughly and make sure Super Admin has full control over client documents and the ability to request missing ones via Email and WhatsApp. Also establish the Odoo integration foundation.

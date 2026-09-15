@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Ditheto Accountants"
+description = "A professional, responsive website for Ditheto Accountants showcasing tax, payroll, bookkeeping, registration, and consulting services, with branch contacts and a comprehensive quotation request experience."
+version = "1.0.0"
+id = "artifacts/ditheto-accountants"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18799
+
+[services.development]
+run = "pnpm --filter @workspace/ditheto-accountants run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ditheto-accountants", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ditheto-accountants/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18799"
+BASE_PATH = "/"

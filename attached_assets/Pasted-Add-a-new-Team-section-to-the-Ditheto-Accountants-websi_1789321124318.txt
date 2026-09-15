@@ -1,0 +1,34 @@
+Add a new “Team” section to the Ditheto Accountants website.
+
+REQUIREMENTS:
+
+1. Create a new page/tab called “Team” (add it to the main navigation).
+
+2. Company Organogram / Organization Chart
+   - Design a clean, modern hierarchical organization chart inspired by the attached example image.
+   - Style: Circular profile photos with coloured borders, name + job title next to each person, connecting lines showing hierarchy.
+   - Use the brand colours (Teal #0D9488, Navy, Gold accents).
+   - Make it fully responsive (stack nicely on mobile).
+   - Include placeholder people for now (you can use realistic stock-style names and titles relevant to an accounting firm, e.g. Managing Director, Tax Manager, Payroll Supervisor, Accountants, Bookkeepers, Admin, etc.).
+
+3. Team Member Profiles
+   - Each person on the organogram should be clickable and open a detailed profile (modal or dedicated section).
+   - Profile fields: Full Name, Job Title, Short Bio, Email, Phone (optional), Profile Photo.
+
+4. Admin Permissions (very important)
+   - In the Admin Portal, grant staff the ability to:
+     • Add / Edit / Delete team members
+     • Edit employee profile information (name, title, bio, contact details)
+     • Upload and replace employee profile images
+     • Re-arrange the hierarchy / organogram structure (drag-and-drop or simple parent selector)
+   - Only authenticated admin users can access these editing controls.
+   - Store team data in the database so changes persist.
+
+5. Visual Quality
+   - Match the professional, clean style of the rest of the site.
+   - Use soft shadows, rounded circular avatars, and clear hierarchy lines.
+   - Add a short introductory text about the team on the left or top of the page (similar to the example).
+
+Reference the attached organization chart image for layout inspiration (circular photos + name cards + connecting lines).
+
+Implement this cleanly and make sure the Admin Portal has full control over employee data and images.

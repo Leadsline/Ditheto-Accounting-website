@@ -1,0 +1,50 @@
+Build a complete professional website for Ditheto Accountants using the project specification below.
+
+PROJECT BRIEF:
+Read and strictly follow the full requirements in this file (create it if needed):
+/home/workdir/artifacts/DITHETO_ACCOUNTANTS_WEBSITE_PROJECT.md
+
+BRAND:
+- Company: Ditheto Accountants
+- Tagline: “Integrity You Can Count On”
+- Colours: Primary Teal (#0D9488), Deep Navy (#0A2540), Accent Gold/Yellow (#EAB308)
+- Clean, modern, professional look with generous spacing, rounded cards, soft shadows
+- Logo: Text-based “DITHETO ACCOUNTANTS” with stylised D (yellow accent)
+
+MUST-HAVE FEATURES:
+1. Detailed Services pages – every service (ITR12, IRP6, Payroll, Co-operative Registration, Bookkeeping, Tax Compliance, etc.) must have expandable detailed information for clients.
+2. Request for Quotation form that lists ALL services as selectable checkboxes/multi-select.
+3. Auto email reminders system for client database (staff can set reminders).
+4. Meta WhatsApp Business integration (floating chat button + deep links).
+5. Admin portal for staff to:
+   - Manage clients
+   - Set and schedule email/WhatsApp reminders
+   - Upload and auto-send posters/flyers
+6. Fully responsive (mobile-first)
+7. Contact pages for both Pretoria and Secunda branches with correct phone numbers and emails.
+
+TECH STACK (use Replit plugins where possible):
+- Next.js 15 (App Router) + TypeScript + Tailwind CSS
+- Use Replit’s database / Auth / Email / Storage plugins if available
+- React Hook Form + Zod for forms
+- Lucide icons
+- Resend or Replit Email for sending
+- WhatsApp Business via wa.me links + ready for Meta API
+
+STRUCTURE:
+- Home
+- Services (detailed)
+- Request a Quote
+- About
+- Contact
+- Admin (protected)
+
+Start by creating the project structure, design system (colours, spacing, components), then build the pages in this order:
+1. Layout + Header + Footer + floating WhatsApp button
+2. Home page
+3. Services page with full detailed content
+4. RFQ form (critical – must include full service list)
+5. Contact + About
+6. Admin portal skeleton with client + reminder + flyer features
+
+Make it production-ready, clean, and professional. Use the marketing posters in /home/workdir/attachments/ as visual reference for style and content.

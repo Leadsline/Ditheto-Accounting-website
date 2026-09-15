@@ -1,0 +1,47 @@
+COMMAND: Improve the professional design quality of the entire Ditheto Accountants website.
+
+STRICT REQUIREMENTS:
+
+1. ANIMATION & MOTION
+   - Add high-quality, subtle animations throughout the site.
+   - Use animated images / Lottie / Framer Motion / CSS animations for:
+     • Hero section
+     • Service cards
+     • Team organogram
+     • Call-to-action buttons
+     • Floating WhatsApp button
+     • Page transitions
+     • Scroll-triggered reveals
+   - Keep animations professional, smooth, and performance-friendly (no jank).
+
+2. DESIGN SYSTEM & VISUAL QUALITY
+   - Run /impeccable init (or equivalent design-system initialization) and strictly follow the generated visual framework for spacing, typography, colour tokens, and layout rules.
+   - Eliminate all visual slop: inconsistent spacing, misaligned elements, weak hierarchy, poor contrast, or amateur styling.
+   - Elevate the overall look to a premium professional accounting-firm standard.
+
+3. FIGMA
+   - Use the Figma MCP / Figma tools if available.
+   - Check for design tokens, components, or structural guidelines.
+   - If a Figma file is linked or can be created, pull visual tokens and apply them.
+   - Generate or refine UI components to match high-end design standards.
+
+4. PLAYWRIGHT VERIFICATION (MANDATORY)
+   - After implementing design and animation changes, spin up Playwright.
+   - Render the key pages (Home, Services, Team, Request a Quote, Contact, Admin).
+   - Take screenshots on both desktop and mobile viewports.
+   - Visually inspect and fix:
+     • Layout alignment
+     • Spacing consistency
+     • Text formatting
+     • Animation behaviour
+     • Mobile responsiveness
+   - There must be zero visual slop before finishing.
+
+5. ADDITIONAL PLUGINS & TOOLS
+   - Use any available plugins (image optimization, animation libraries, design tokens, UI component libraries, etc.) that improve professional appearance and performance.
+   - Prefer modern, polished component libraries and animation tools that keep the code clean.
+
+GOAL:
+Transform the website into a visually premium, highly professional, and animated experience that matches the quality expected from a modern accounting firm brand (“Integrity You Can Count On”).
+
+Execute the above thoroughly. Start with design-system initialization, then animations, then Figma alignment if possible, and finally Playwright visual QA + fixes.
