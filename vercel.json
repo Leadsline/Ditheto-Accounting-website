@@ -11,6 +11,10 @@
   },
   "routes": [
     {
+      "src": "/__clerk/(.*)",
+      "dest": "/api/[...path]"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/[...path]"
     },
