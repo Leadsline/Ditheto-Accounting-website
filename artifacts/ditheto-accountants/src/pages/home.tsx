@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Calculator, Check, FileSpreadsheet, BriefcaseBusiness, BookOpen, MessageCircle, HardHat, Building2, Database, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import heroOne from "@assets/ditheto-accountants-hero_1789472037427.jpg";
-import heroTwo from "@assets/ditheto-accountants-hero-v2_1789472037428.jpg";
-import heroThree from "@assets/ditheto-accountants-hero-v3_1789472037429.jpg";
-import heroFour from "@assets/ditheto-accountants-hero-v4_1789472037429.jpg";
+import heroOne from "@assets/ditheto-accountants-hero-v2-corrected-v2_1789576958004.jpg";
+import heroTwo from "@assets/ditheto-accountants-hero-v3-corrected_1789576958005.jpg";
+import heroThree from "@assets/ditheto-accountants-hero-v4-corrected_1789576958002.jpg";
 
-const heroImages = [heroOne, heroTwo, heroThree, heroFour];
+const heroImages = [heroOne, heroTwo, heroThree];
 
 function HeroCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [direction, setDirection] = useState(1);
 
   const showSlide = (index: number) => {
-    setDirection(index >= activeSlide ? 1 : -1);
     setActiveSlide((index + heroImages.length) % heroImages.length);
   };
 
   useEffect(() => {
+    heroImages.forEach((source) => {
+      const image = new Image();
+      image.decoding = "async";
+      image.src = source;
+    });
+  }, []);
+
+  useEffect(() => {
     if (paused) return;
     const timer = window.setInterval(() => {
-      setDirection(1);
       setActiveSlide((current) => (current + 1) % heroImages.length);
     }, 7200);
     return () => window.clearInterval(timer);
@@ -31,7 +35,7 @@ function HeroCarousel() {
 
   return (
     <div
-      className="group relative h-full min-h-[280px] overflow-hidden rounded-[1.75rem] shadow-[0_35px_110px_-48px_rgba(46,188,179,.55),0_30px_80px_-46px_rgba(0,0,0,.9)]"
+      className="group relative aspect-[79/53] w-full overflow-hidden rounded-[1.75rem] bg-secondary shadow-[0_35px_110px_-48px_rgba(46,188,179,.55),0_30px_80px_-46px_rgba(0,0,0,.9)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -39,20 +43,20 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="Ditheto Accountants welcome images"
     >
-      <div className="relative h-full min-h-[280px] overflow-hidden rounded-[1.75rem]">
-        <AnimatePresence initial={false} custom={direction}>
+      <div className="absolute inset-0 overflow-hidden rounded-[1.75rem]">
+        {heroImages.map((source, index) => (
           <motion.img
-            key={activeSlide}
-            src={heroImages[activeSlide]}
-            alt={`Ditheto Accountants welcome image ${activeSlide + 1}`}
-            custom={direction}
-            initial={{ opacity: 0, x: direction > 0 ? 45 : -45, scale: 1.02 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: direction > 0 ? -45 : 45, scale: 1.01 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 h-full w-full object-cover"
+            key={source}
+            src={source}
+            alt={index === activeSlide ? `Ditheto Accountants welcome image ${index + 1}` : ""}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === activeSlide ? 1 : 0 }}
+            transition={{ opacity: { duration: 0.9, ease: "easeInOut" } }}
+            className="absolute inset-0 h-full w-full object-contain [will-change:opacity]"
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : "auto"}
           />
-        </AnimatePresence>
+        ))}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-secondary/20 via-transparent to-secondary/10" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-secondary/35 to-transparent" />
       </div>
@@ -118,7 +122,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .15, ease: [0.22, 1, .36, 1] }} className="min-w-0 lg:col-start-2 lg:row-start-2 lg:h-full lg:-mr-14 xl:-mr-24">
+            <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .15, ease: [0.22, 1, .36, 1] }} className="min-w-0 lg:col-start-2 lg:row-start-2 lg:self-center">
               <HeroCarousel />
             </motion.div>
           </div>
